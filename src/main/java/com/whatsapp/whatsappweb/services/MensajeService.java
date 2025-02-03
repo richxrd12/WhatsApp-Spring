@@ -2,9 +2,11 @@ package com.whatsapp.whatsappweb.services;
 
 import com.whatsapp.whatsappweb.entities.Mensaje;
 import com.whatsapp.whatsappweb.repositories.MensajeRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class MensajeService {
     private final MensajeRepository mensajeRepository;
 

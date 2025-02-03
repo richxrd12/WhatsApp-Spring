@@ -6,18 +6,17 @@
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
-<h1 th:text="|Bienvenido, ${usuario.getNombre()}|"></h1>
-    <div id="sidebar">
-        <h2>Usuarios</h2>
-        <ul>
-            <div th:each="usuario : ${usuarios}">
+<h1>Usuarios</h1>
+<div id="sidebar">
+    <h2>Usuarios</h2>
+    <ul>
+        <div th:each="usuario : ${usuarios}">
+            <a th:href="@{/chat(username=${#strings.trim(usuario.getUsuario())})}">
                 <p th:text="${usuario.getNombre()}">Nombre</p>
                 <span th:text="${usuario.getEstado()}">Estado</span>
-            </div>
-        </ul>
-    </div>
-    <div id="chat">
-
-    </div>
+            </a>
+        </div>
+    </ul>
+</div>
 </body>
 </html>

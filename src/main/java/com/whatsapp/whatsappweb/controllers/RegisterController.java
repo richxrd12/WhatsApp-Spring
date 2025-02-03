@@ -22,7 +22,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public void register(
+    public String register(
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidos") String apellidos,
             @RequestParam("estado") String estado,
@@ -40,9 +40,11 @@ public class RegisterController {
 
         if (usuarioService.findByUsuario(username) != null) {
             model.addAttribute("error", "El usuario ya existe");
+            return "register";
         }else{
             usuarioService.save(usuario);
             model.addAttribute("success", "Usuario registrado con exito");
+            return "index";
         }
     }
 }
