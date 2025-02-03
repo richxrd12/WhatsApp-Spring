@@ -6,17 +6,33 @@
     <link rel="stylesheet" th:href="@{/css/home.css}">
 </head>
 <body>
-<h1>Usuarios</h1>
-<div id="sidebar">
-    <h2>Usuarios</h2>
-    <ul>
-        <div th:each="usuario : ${usuarios}">
-            <a th:href="@{/chat(username=${#strings.trim(usuario.getUsuario())})}">
-                <p th:text="${usuario.getNombre()}">Nombre</p>
-                <span th:text="${usuario.getEstado()}">Estado</span>
+    <nav>
+        <a th:href="@{/}"><img alt="volver" th:src="@{/img/flecha-volver.png}"/></a>
+
+        <div id="image-container">
+            <img th:src="@{/img/whatsapp-icon.png}"/>
+            <h1>WhatsApp Web</h1>
+        </div>
+
+        <div id="profile">
+            <a th:href="@{/profile(username=${#strings.trim(usuario.getUsuario())})}">
+                <img alt="user" th:src="@{/img/user.png}"/>
+                <h4 th:text="${usuario.getNombre()}"></h4>
             </a>
         </div>
-    </ul>
-</div>
+
+    </nav>
+
+    <div id="contactos">
+        <h2>Usuarios</h2>
+        <ul>
+            <div th:each="usuario : ${usuarios}">
+                <a th:href="@{/chat(username=${#strings.trim(usuario.getUsuario())})}">
+                    <p th:text="${usuario.getNombre()}">Nombre</p>
+                    <span th:text="${usuario.getEstado()}">Estado</span>
+                </a>
+            </div>
+        </ul>
+    </div>
 </body>
 </html>
