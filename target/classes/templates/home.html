@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contactos WhatsApp Web</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
+<body>
+    <div id="sidebar">
+        <h2>Usuarios</h2>
+        <ul>
+            <div th:each="usuario : ${usuarios}">
+                <p th:text="${usuario.getNombre()}">Nombre</p>
+                <span th:text="${usuario.getEstado()}">Estado</span>
+            </div>
+        </ul>
+    </div>
+</body>
+</html>
