@@ -49,3 +49,65 @@ nav img{
 #profile a p:hover{
     color: white;
 }
+
+#contacts{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#contacts ul{
+    padding: 0;
+}
+
+#user-card{
+    max-width: 400px;
+    height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#user-card:hover{
+    transition: 0.5s;
+    background-color: #7a7a7a;
+    border-radius: 20px;
+    span{
+        color: white;
+    }
+}
+
+#user-card a{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    text-decoration: none;
+    align-items: center;
+    color: black;
+}
+
+#user-card a img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-inline: 20px;
+}
+
+#card-info{
+    align-items: center;
+    justify-content: start;
+    max-width: 340px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#card-info p{
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+#card-info span{
+    color: #7a7a7a;
+}

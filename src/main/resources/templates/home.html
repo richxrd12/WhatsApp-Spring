@@ -15,7 +15,7 @@
         </div>
 
         <div id="profile">
-            <a th:href="@{/profile(username=${#strings.trim(usuario.getUsuario())})}">
+            <a th:href="@{/profile}">
                 <img alt="user" th:src="@{/img/user.png}"/>
                 <h4 th:text="${usuario.getNombre()}"></h4>
             </a>
@@ -23,13 +23,16 @@
 
     </nav>
 
-    <div id="contactos">
+    <div id="contacts">
         <h2>Usuarios</h2>
         <ul>
-            <div th:each="usuario : ${usuarios}">
+            <div th:each="usuario : ${usuarios}" id="user-card">
                 <a th:href="@{/chat(username=${#strings.trim(usuario.getUsuario())})}">
-                    <p th:text="${usuario.getNombre()}">Nombre</p>
-                    <span th:text="${usuario.getEstado()}">Estado</span>
+                    <img alt="profile-pic" th:src="@{/img/hasbulla.jpg}"/>
+                    <div id="card-info">
+                        <p th:text="${usuario.getNombre()}">Nombre</p>
+                        <span th:text="${usuario.getEstado()}">Estado</span>
+                    </div>
                 </a>
             </div>
         </ul>
