@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login WhatsApp Web</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
+</head>
+<body>
+
+    <div id="image-container">
+        <img th:src="@{/img/whatsapp-icon.png}"/>
+        <h1>WhatsApp Web</h1>
+    </div>
+
+    <div id="content-container">
+        <h1>Login</h1>
+
+        <form th:action="@{/login}" method="post">
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username"/>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password"/>
+
+            <button type="submit">Iniciar sesión</button>
+        </form>
+        <a href="/register">¿No tiene cuenta? Regístrese</a>
+
+        <div id="error" th:if="${error != null}">
+            <p th:text="${error}">Error</p>
+        </div>
+
+    </div>
+</body>
+</html>

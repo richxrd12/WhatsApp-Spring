@@ -1,0 +1,88 @@
+*{
+    font-family: "Fira Code", sans-serif;
+}
+
+body{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#image-container{
+    width: 100%;
+    background-color: #25D366;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-container img{
+    width: 50px;
+    height: 50px;
+}
+
+#image-container h1{
+    margin-left: 20px;
+}
+
+#content-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#content-container a{
+    text-decoration: none;
+    color: #25D366;
+}
+
+#content-container a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+form{
+    margin-top: 30px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+form input{
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+form label{
+    width: 80px;
+    margin-right: 130px;
+}
+
+#username, #password{
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+form button {
+    margin-bottom: 20px;
+    padding-block: 10px;
+    padding-inline: 20px;
+    background-color: #25D366;
+    border-radius: 20px;
+    border: none;
+}
+
+form button:hover{
+    color: #25D366;
+    background-color: white;
+}
+
+#error p{
+    text-align: center;
+    color: #d55959;
+}

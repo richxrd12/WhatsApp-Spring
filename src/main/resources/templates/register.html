@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register WhatsApp Web</title>
+    <link rel="stylesheet" th:href="@{/css/register.css}">
+</head>
+<body>
+    <div id="image-container">
+        <img th:src="@{/img/whatsapp-icon.png}"/>
+        <h1>WhatsApp Web</h1>
+    </div>
+    <div id="content-container">
+        <h1>Register</h1>
+        <form th:action="@{/register}" method="post">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre"/>
+
+            <label for="apellidos">Apellidos:</label>
+            <input type="text" id="apellidos" name="apellidos"/>
+
+            <label for="estado">Estado:</label>
+            <input type="text" id="estado" name="estado"/>
+
+            <label for="username">Usuario:</label>
+            <input type="text" id="username" name="username"/>
+
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" name="password"/>
+
+            <button type="submit">Registrarse</button>
+        </form>
+    </div>
+    <div id="error" th:if="${error != null}">
+        <p th:text="${error}">Error</p>
+    </div>
+    <div id="success" th:if="${success != null}">
+        <p th:text="${success}">Se ha registrado correctamente</p>
+    </div>
+</body>
+</html>
