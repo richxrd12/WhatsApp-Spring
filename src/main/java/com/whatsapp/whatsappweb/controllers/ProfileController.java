@@ -23,7 +23,6 @@ public class ProfileController {
             Model model
     ) {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-
         model.addAttribute("usuario", usuario);
 
         return "profile";
