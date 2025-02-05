@@ -6,20 +6,17 @@ body{
     margin: 0;
 }
 
-nav{
+nav {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: #25D366;
-    height: 60px;
+    height: 80px;
 }
 
-#image-container{
-    width: 30%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+nav a{
+    width: 200px;
+    margin-top: 10px;
 }
 
 nav img{
@@ -28,15 +25,33 @@ nav img{
     margin: 10px;
 }
 
+#image-container{
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 300px;
+    justify-content: center;
+    align-items: center;
+}
+
+#image-container img{
+    width: 50px;
+    height: 50px;
+}
+
+#image-container h1{
+    font-size: 30px;
+}
+
+#profile{
+    width: 200px;
+}
+
 #profile a{
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     padding-right: 20px;
-}
-
-#profile a{
     text-decoration: none;
 }
 
@@ -46,7 +61,7 @@ nav img{
     color: black;
 }
 
-#profile a p:hover{
+#profile a h4:hover{
     color: white;
 }
 

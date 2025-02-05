@@ -2,9 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar perfil WhatsApp Web</title>
+    <link rel="stylesheet" th:href="@{/css/profile.css}">
 </head>
 <body>
-    <h1>Perfil</h1>
+    <div id="image-container">
+        <a th:href="@{/home}">
+            <img th:src="@{/img/whatsapp-icon.png}"/>
+            <h1>WhatsApp Web</h1>
+        </a>
+    </div>
+
+    <h1 th:text="|Perfil ${usuario.getNombre()}|">Perfil</h1>
+
+    <form th:action="@{/profile/update}" method="post">
+        <input type="hidden" name="_method" value="put"/>
+
+        <label for="nombre">Nombre:</label>
+        <input th:value="${usuario.getNombre()}" type="text" id="nombre" name="nombre"/>
+
+        <label for="apellidos">Apellidos:</label>
+        <input th:value="${usuario.getApellidos()}" type="text" id="apellidos" name="apellidos"/>
+
+        <label for="estado">Estado:</label>
+        <textarea th:value="${usuario.getEstado()}" type="text" id="estado" name="estado" rows="4" cols="50"></textarea>
+
+        <label for="username">Usuario:</label>
+        <input th:value="${usuario.getUsuario()}" type="text" id="username" name="username"/>
+
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password"/>
+
+        <button type="submit">Actualizar</button>
+    </form>
 </body>
 </html>

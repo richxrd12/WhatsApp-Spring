@@ -17,7 +17,7 @@
         <div id="profile">
             <a th:href="@{/profile}">
                 <img alt="user" th:src="@{/img/user.png}"/>
-                <h4 th:text="${usuario.getNombre()}"></h4>
+                <h4 th:text="${usuario.getNombre().toUpperCase()}"></h4>
             </a>
         </div>
 
