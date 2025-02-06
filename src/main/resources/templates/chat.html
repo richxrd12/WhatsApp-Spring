@@ -3,16 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
 </head>
 <body>
 
-    <nav>
-        <img alt="prof-pic" th:src="@{/img/hasbulla.jpg}"/>
-        <div>
-            <p th:text="${nombreUsuario}"></p>
-            <span th:text="${estado}"></span>
+    <div id="top-bar">
+
+        <div id="image-container">
+            <a th:href="@{/home}">
+                <img th:src="@{/img/whatsapp-icon.png}"/>
+                <h1>WhatsApp Web</h1>
+            </a>
         </div>
-    </nav>
+
+
+        <div id="user-info">
+            <img alt="prof-pic" th:src="@{/img/hasbulla.jpg}"/>
+            <p th:text="${nombreUsuario}"></p>
+        </div>
+
+    </div>
+
+    <div id="chat">
+
+    </div>
+
+    <form method="post">
+        <label for="message" hidden="hidden"></label>
+        <textarea name="message" id="message"></textarea>
+
+        <button type="submit">
+            <img th:src="@{/img/send.png}" alt="enviar"/>
+        </button>
+    </form>
 
 </body>
 </html>

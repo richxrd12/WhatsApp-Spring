@@ -71,3 +71,7 @@ form textarea{
 form button{
     margin-top: 20px;
 }
+
+#error p{
+    color: #d55959;
+}
