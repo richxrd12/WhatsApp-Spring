@@ -28,6 +28,7 @@ public class RegisterController {
             @RequestParam("estado") String estado,
             @RequestParam("username") String username,
             @RequestParam("password") String password,
+            @RequestParam("repeat-password") String repeatPassword,
             Model model
     ) {
         Usuario usuario = new Usuario();
@@ -41,7 +42,10 @@ public class RegisterController {
         if (usuarioService.findByUsuario(username) != null) {
             model.addAttribute("error", "El usuario ya existe");
             return "register";
-        }else{
+        } else if (!usuario.getPassword().equals(repeatPassword)) {
+            model.addAttribute("error", "Las contraseñas no coinciden");
+            return "register";
+        } else{
             usuarioService.save(usuario);
             model.addAttribute("success", "Usuario registrado con exito");
             return "index";

@@ -26,13 +26,16 @@
             <input th:value="${usuario.getApellidos()}" type="text" id="apellidos" name="apellidos"/>
 
             <label for="estado">Estado:</label>
-            <textarea th:value="${usuario.getEstado()}" type="text" id="estado" name="estado" rows="4" cols="50"></textarea>
+            <textarea th:text="${usuario.getEstado()}" id="estado" name="estado" rows="4" cols="50"></textarea>
 
             <label for="username">Usuario:</label>
             <input th:value="${usuario.getUsuario()}" type="text" id="username" name="username"/>
 
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password"/>
+
+            <label for="repeat-password">Contraseña:</label>
+            <input type="password" id="repeat-password" name="repeat-password"/>
 
             <button type="submit">Actualizar</button>
         </form>
