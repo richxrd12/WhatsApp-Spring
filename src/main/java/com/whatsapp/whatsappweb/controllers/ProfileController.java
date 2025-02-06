@@ -33,8 +33,18 @@ public class ProfileController {
                                 @RequestParam("estado") String estado,
                                 @RequestParam("username") String username,
                                 @RequestParam("password") String password,
+                                @RequestParam("repeat-password") String repeatPassword,
                                 Model model,
                                 HttpSession session){
+
+        usuario = (Usuario) session.getAttribute("usuario");
+
+        if (!password.equals(repeatPassword)) {
+            model.addAttribute("error", "Los campos de contraseña deben coincidir.");
+            model.addAttribute("usuario", usuario);
+            return "profile";
+        }
+
         usuario.setNombre(nombre);
         usuario.setApellidos(apellidos);
         usuario.setEstado(estado);

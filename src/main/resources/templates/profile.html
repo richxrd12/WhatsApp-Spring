@@ -34,11 +34,14 @@
             <label for="password">Contraseña:</label>
             <input type="password" id="password" name="password"/>
 
-            <label for="repeat-password">Contraseña:</label>
+            <label for="repeat-password">Repetir contraseña:</label>
             <input type="password" id="repeat-password" name="repeat-password"/>
 
             <button type="submit">Actualizar</button>
         </form>
+        <div id="error" th:if="${error != null}">
+            <p th:text="${error}">Error</p>
+        </div>
     </div>
 </body>
 </html>
