@@ -19,4 +19,8 @@ public class MensajeService {
                 usuarioEmisor, usuarioReceptor
         );
     }
+
+    public void save(Mensaje mensaje) {
+        mensajeRepository.save(mensaje);
+    }
 }

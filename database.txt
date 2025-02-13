@@ -1,0 +1,135 @@
+/* CREA LA BASE DE DATOS */
+use whatsapp;
+
+/* MUESTRA LAS COLECCIONES */
+db.getCollectionNames();
+
+/*CREA LAS COLECCIONES. PLANTEA COLECCIONES QUE TENGAN ARRAYS Y DOCUMENTOS.*/
+db.createCollection("usuarios");
+db.createCollection("mensajes");
+
+/*INSERTA DE UNO EN UNO EN UNA DE LAS COLECCIONES */
+db.usuarios.insertOne({
+    nombre: "Richard",
+    apellidos: "Quintana Padrón",
+    estado: ":D",
+    usuario: "richa",
+    password: "1234"
+});
+
+db.usuarios.insertOne({
+    nombre: "Betsaida",
+    apellidos: "Rodríguez S.",
+    estado: "¿No? ¿No?",
+    usuario: "bet",
+    password: "1234"
+})
+
+/* INSERTA 10 DOCUMENTOS A LA VEZ EN LA OTRA COLECCIÓN */
+
+db.mensajes.insertMany([
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:29.000000000", texto: "Hola señora"},
+    { emisor: "bet", destinatario: "richa", fecha: "2025-02-11T18:11:32.000000000", texto: "Hola señor"},
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:35.000000000", texto: "¿Hiciste lo de Odoo?"},
+    { emisor: "bet", destinatario: "richa", fecha: "2025-02-11T18:11:37.000000000", texto: "No tío, es un asco"},
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:37.000000000", texto: "Ya, pero hay que hacerlo, por desgracia"},
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:38.000000000", texto: "Si quieres te lo puedo pasar... Pero son 5 pavos"},
+    { emisor: "bet", destinatario: "richa", fecha: "2025-02-11T18:11:40.000000000", texto: "Vale, perfecto"},
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:42.000000000", texto: "Es broma, no te lo puedo pasar, mi madre no me deja"},
+    { emisor: "bet", destinatario: "richa", fecha: "2025-02-11T18:11:44.000000000", texto: "¡Ja, ja, ja! Eres un troll xD"},
+    { emisor: "richa", destinatario: "bet", fecha: "2025-02-11T18:11:47.000000000", texto: "Sí, es que me leí el libro troll del Rubius y estoy hecho un troleador"}
+])
+
+/* CONSULTA DEL LOGIN */
+db.usuarios.findOne({ usuario: "richa", password: "1234" });
+
+/* CONSULTA DE MENSAJES DE X DÍA */
+db.mensajes.find({ fecha: { $gte: ISODate("2025-02-11T00:00:00.000Z"), $lt: ISODate("2025-02-12T00:00:00.000Z") } }).toArray()
+
+/* MENSAJE ENTRE 2 USUARIOS */
+db.mensajes.find({
+    $or: [
+        { emisor: "richa", destinatario: "bet" },
+        { emisor: "bet", destinatario: "richa" }
+    ]
+}).toArray();
+
+/* CONSULTA DE USUARIO (PARA QUE NO SE REPITAN) */
+db.usuarios.findOne({ usuario: "richa" });
+
+/* BUSCAR MENSAJE POR TEXTO (ÚTIL EN WHATSAPP) */
+db.mensajes.find({ texto: /Odoo/i }).toArray();
+
+/* AGREGACIONES */
+
+/* CUENTA MENSAJES DE USUARIOS Y LOS ORDENA DE MAYOR A MENOR (VER QUIEN USA MÁS WHATSAPP/QUIEN MANDA MAS MENSAJES)
+db.mensajes.aggregate([
+    { $group: { _id: "$emisor", total_mensajes: { $sum: 1 } } },
+    { $sort: { total_mensajes: -1 } }
+]).toArray();
+
+/* MUESTRA PRIMEROS 3 MENSAJES ENTRE DOS USUARIOS */
+db.mensajes.aggregate([
+    {
+        $match: {
+            $or: [
+                { emisor: "richa", destinatario: "bet" },
+                { emisor: "bet", destinatario: "richa" }
+            ]
+        }
+    },
+    { $sort: { fecha: 1 } },
+    { $limit: 3 }
+]).toArray();
+
+/* UPDATES */
+
+/* ACTUALIZAR EL ESTADO DE UN USUARIO */
+db.usuarios.updateOne(
+    { usuario: "richa" },
+    { $set: { estado: "Ocupado" } }
+);
+
+/* EDITAR UN MENSAJE */
+db.mensajes.updateOne(
+    { texto: "Hola señora",
+      emisor: "richa",
+      receptor: "bet"},
+    { $set: { texto: "Hola doña" } }
+);
+
+/* UPDATE DE USUARIO PORQUE BETSAIDA SE ABURRIÓ DEL SUYO */
+db.usuarios.updateOne(
+    { usuario: "bet" },
+    { $set: { usuario: "betsaida" } }
+);
+
+/* UPDATE DE TODOS LOS MENSAJES QUE TENÍA BETSAIDA */
+
+db.mensajes.updateMany(
+    { emisor: "bet" },
+    { $set: { emisor: "betsaida" } }
+);
+
+db.mensajes.updateMany(
+    { destinatario: "bet" },
+    { $set: { destinatario: "betsaida" } }
+);
+
+/* DELETE */
+
+/* BORRAR TODOS LOS MENSAJES QUE TENGAN ODOO (PORQUE NO QUIERO QUE NADIE SEPA QUE USO ODOO, ME AVERGÜENZA)
+db.mensajes.deleteMany(
+    { texto: /Odoo/i }
+);
+
+/* BORRAR TODOS LOS MENSAJES DE X FECHA HACIA ATRÁS */
+db.mensajes.deleteMany(
+    { fecha: { $lt: ISODate("2025-02-12T00:00:00.000Z") } }
+);
+
+
+/* BORRAR TODOS LOS MENSAJES DE X USUARIO (SE DIO DE BAJA) */
+db.mensajes.deleteMany(
+    { $or: [ { emisor: "bet" }, { destinatario: "bet" } ] }
+);

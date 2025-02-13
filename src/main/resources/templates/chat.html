@@ -20,15 +20,22 @@
         <div id="user-info">
             <img alt="prof-pic" th:src="@{/img/hasbulla.jpg}"/>
             <p th:text="${nombreUsuario}"></p>
+            <p id="username" th:text="${usuario}" hidden="hidden"></p>
         </div>
 
     </div>
 
     <div id="chat">
-
+        <div id="messages">
+            <div th:each="mensaje : ${mensajes}"
+                th:classappend="${mensaje.usuarioEmisor == nombreUsuario} ? 'mensaje-emisor' : 'mensaje-receptor'"
+                class="mensaje">
+                <p th:text="${mensaje.getTexto()}"></p>
+            </div>
+        </div>
     </div>
 
-    <form method="post">
+    <form method="post" id="messageForm">
         <label for="message" hidden="hidden"></label>
         <textarea name="message" id="message"></textarea>
 
@@ -37,5 +44,8 @@
         </button>
     </form>
 
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs/lib/stomp.min.js"></script>
+    <script th:src="@{/js/script.js}"></script>
 </body>
 </html>
