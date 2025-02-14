@@ -14,4 +14,5 @@ public class Mensaje {
     private String usuarioReceptor;
     private LocalDateTime fecha;
     private String texto;
+    private boolean edited;
 }

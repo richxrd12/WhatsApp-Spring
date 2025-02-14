@@ -1,3 +1,5 @@
+window.onload = scrollToBottom;
+
 document.addEventListener("DOMContentLoaded", function () {
     const socket = new SockJS('/ws'); // Conectar al endpoint WebSocket
     const stompClient = Stomp.over(socket);
@@ -31,11 +33,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
         mensajeDiv.classList.add('mensaje-emisor');
 
-        mensajeDiv.innerHTML = `<p>${messageInput.value}</p>
-                                <span>${new Date().toISOString().split("T")[0].replace(/-/g, "/")}</span>`;
+        mensajeDiv.innerHTML = `<a href="">
+                                    <p>${messageInput.value}</p>
+                                    <div id="message-info">
+                                        <span>${new Date().toISOString().split("T")[0].replace(/-/g, "/")}</span>
+                                    </div>
+                                </a>`;
         mensajesDiv.appendChild(mensajeDiv);
 
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(mensaje));
+
         messageInput.value = '';
+
+        scrollToBottom()
     });
+
+
 });
+
+function scrollToBottom(){
+    let html = document.querySelector("html");
+
+    html.scrollTop = html.scrollHeight;
+}

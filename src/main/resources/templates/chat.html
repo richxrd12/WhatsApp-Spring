@@ -32,12 +32,18 @@
 
                 <a th:if="${mensaje.usuarioReceptor.equals(usuario)}" th:href="@{/editar/{id}(id=${mensaje.id})}">
                     <p th:text="${mensaje.getTexto()}"></p>
-                    <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                    <div id="message-info">
+                        <span th:if="${mensaje.isEdited()}">Editado</span>
+                        <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                    </div>
                 </a>
 
                 <a th:if="${!mensaje.usuarioReceptor.equals(usuario)}" href="">
                     <p th:text="${mensaje.getTexto()}"></p>
-                    <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                    <div id="message-info-contact">
+                        <span th:if="${mensaje.isEdited()}">Editado</span>
+                        <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                    </div>
                 </a>
 
             </div>

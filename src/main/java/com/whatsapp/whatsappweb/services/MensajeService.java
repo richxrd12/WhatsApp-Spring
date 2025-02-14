@@ -21,6 +21,10 @@ public class MensajeService {
         );
     }
 
+    public Mensaje findById(ObjectId id) {
+        return mensajeRepository.findById(id).orElse(null);
+    }
+
     public void save(Mensaje mensaje) {
         mensajeRepository.save(mensaje);
     }

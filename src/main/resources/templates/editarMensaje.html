@@ -2,9 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar mensaje - WhatsApp Web</title>
+    <link rel="stylesheet" th:href="@{/css/editarMensaje.css}">
 </head>
 <body>
-    <h1>Editar mensaje</h1>
+    <div id="image-container">
+        <a th:href="@{/home}">
+            <img th:src="@{/img/whatsapp-icon.png}"/>
+            <h1>WhatsApp Web</h1>
+        </a>
+    </div>
+    <div id="content-container">
+        <form th:action="@{/editar/{id}(id=${mensaje.getId()})}" th:object="${mensaje}" method="post">
+            <input type="hidden" name="_method" value="patch"/>
+
+            <label for="texto">Editar mensaje</label>
+            <textarea id="texto" name="texto" th:text="*{getTexto()}" required></textarea>
+            <button type="submit">Editar</button>
+        </form>
+    </div>
 </body>
 </html>

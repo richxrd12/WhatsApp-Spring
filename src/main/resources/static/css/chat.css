@@ -59,9 +59,14 @@ body{
     font-weight: bold;
 }
 
+#chat{
+    margin-bottom: 85px;
+}
+
 #messages{
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
 }
 
 .mensaje-emisor{
@@ -98,10 +103,15 @@ body{
     font-size: 15px;
 }
 
-.mensaje-emisor span, .mensaje-receptor span{
-    align-self: flex-end;
+#message-info, #message-info-contact{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#message-info-contact span, #message-info span{
     font-size: 11px;
     color: #989898;
+    margin-left: 7px;
 }
 
 form{

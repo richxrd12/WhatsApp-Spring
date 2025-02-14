@@ -12,8 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
@@ -70,6 +68,7 @@ public class ChatController {
         mensaje.setUsuarioEmisor(usuario.getUsuario());
         mensaje.setUsuarioReceptor(contacto.getUsuario());
         mensaje.setFecha(LocalDateTime.now());
+        mensaje.setEdited(false);
 
         mensajeService.save(mensaje);
 
