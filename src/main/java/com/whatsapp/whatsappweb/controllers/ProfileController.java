@@ -2,12 +2,15 @@ package com.whatsapp.whatsappweb.controllers;
 
 import com.whatsapp.whatsappweb.entities.Usuario;
 import com.whatsapp.whatsappweb.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Tag(name = "Profile", description = "Controller para gestionar los datos del perfil del usuario")
 public class ProfileController {
     private final UsuarioService usuarioService;
     private Usuario usuario;
@@ -17,6 +20,8 @@ public class ProfileController {
     }
 
     @GetMapping("/profile")
+    @Operation(summary = "Muestra el perfil",
+            description = "Nos redirige a la vista del perfil del usuario")
     public String profile(
             HttpSession session,
             Model model
@@ -28,6 +33,8 @@ public class ProfileController {
     }
 
     @PutMapping("/profile/update")
+    @Operation(summary = "Update del usuario",
+            description = "Actualiza el usuario con un método PUT con los input del html")
     public String updateProfile(@RequestParam("nombre") String nombre,
                                 @RequestParam("apellidos") String apellidos,
                                 @RequestParam("estado") String estado,
@@ -56,5 +63,17 @@ public class ProfileController {
         session.setAttribute("usuario", usuario);
 
         return "redirect:/profile";
+    }
+
+    @DeleteMapping("/profile/delete")
+    @Operation(summary = "Delete user",
+            description = "Busca el usuario que vamos a borrar (por si acaso), lo borramos y nos redirige al login")
+    public String deleleUser(){
+
+        Usuario usuarioBorrar = usuarioService.findByUsuario(usuario.getUsuario());
+
+        usuarioService.delete(usuarioBorrar);
+
+        return "redirect:/";
     }
 }

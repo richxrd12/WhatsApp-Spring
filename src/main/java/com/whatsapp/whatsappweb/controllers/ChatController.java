@@ -4,6 +4,9 @@ import com.whatsapp.whatsappweb.entities.Mensaje;
 import com.whatsapp.whatsappweb.entities.Usuario;
 import com.whatsapp.whatsappweb.services.MensajeService;
 import com.whatsapp.whatsappweb.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -18,7 +21,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Tag(name = "Chat", description = "Controller para manejar las operaciones con el chat")
 public class ChatController {
+
     private final MensajeService mensajeService;
     private final UsuarioService usuarioService;
     private final SimpMessagingTemplate messagingTemplate;
@@ -32,7 +37,10 @@ public class ChatController {
         this.messagingTemplate = messagingTemplate;
     }
 
+
     @GetMapping("/chat")
+    @Operation(summary = "Obtener los mensajes del chat entre 2 usuarios",
+            description = "Devuelve la lista de mensajes entre usuario X y usuario Y")
     public String cargarChat(
             @RequestParam("username") String username,
             HttpSession session,
@@ -59,6 +67,8 @@ public class ChatController {
     }
 
     @MessageMapping("/chat.sendMessage")
+    @Operation(summary = "Método de WebSockets para mandar mensajes",
+            description = "Manda un mensaje")
     public void sendMensaje(@Payload Mensaje mensaje) {
         if (usuario == null) {
             System.out.println("Usuario no encontrado en la sesión.");

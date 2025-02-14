@@ -2,6 +2,8 @@ package com.whatsapp.whatsappweb.controllers;
 
 import com.whatsapp.whatsappweb.entities.Usuario;
 import com.whatsapp.whatsappweb.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
+@Tag(name = "Register", description = "Controller para gestionar el register")
 public class RegisterController {
     private final UsuarioService usuarioService;
 
@@ -16,12 +19,16 @@ public class RegisterController {
         this.usuarioService = usuarioService;
     }
 
+    @Operation(summary = "Muestra register",
+            description = "Nos redirige a la vista del register")
     @GetMapping("/register")
     public String showRegister() {
         return "register";
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Register",
+            description = "Coge los parámetros de los textfield y los guarda en un objeto Usuario para guardarlo")
     public String register(
             @RequestParam("nombre") String nombre,
             @RequestParam("apellidos") String apellidos,

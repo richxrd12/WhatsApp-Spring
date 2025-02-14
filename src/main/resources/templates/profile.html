@@ -39,6 +39,12 @@
 
             <button type="submit">Actualizar</button>
         </form>
+
+        <form th:action="@{/profile/delete}" id="form-delete" method="post">
+            <input type="hidden" name="_method" value="DELETE"/>
+            <button type="submit" id="delete">Darse de baja</button>
+        </form>
+
         <div id="error" th:if="${error != null}">
             <p th:text="${error}">Error</p>
         </div>

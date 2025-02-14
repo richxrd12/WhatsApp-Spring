@@ -2,6 +2,8 @@ package com.whatsapp.whatsappweb.controllers;
 
 import com.whatsapp.whatsappweb.entities.Usuario;
 import com.whatsapp.whatsappweb.services.UsuarioService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
+@Tag(name = "Home", description = "Controller para mostrar la vista de home")
 public class HomeController {
     private final UsuarioService usuarioService;
 
@@ -22,6 +25,8 @@ public class HomeController {
     }
 
     @GetMapping("/home")
+    @Operation(summary = "Muestra el home",
+            description = "Nos muestra la vista Home")
     public String home(Model model, HttpSession session) {
         //Para ordenarlos por nombre
         List<Usuario> usuarios = usuarioService.findAll().stream().sorted(Comparator.comparing(Usuario::getNombre))

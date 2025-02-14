@@ -70,6 +70,15 @@ form textarea{
 
 form button{
     margin-top: 20px;
+    width: max-content;
+    background-color: #25D366;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #cacaca;
+}
+
+#delete{
+    background-color: #d55959;
 }
 
 #error p{
