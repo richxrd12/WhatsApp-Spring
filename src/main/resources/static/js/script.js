@@ -31,7 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         mensajeDiv.classList.add('mensaje-emisor');
 
-        mensajeDiv.innerHTML = `<p>${messageInput.value}</p>`;
+        mensajeDiv.innerHTML = `<p>${messageInput.value}</p>
+                                <span>${new Date().toISOString().split("T")[0].replace(/-/g, "/")}</span>`;
         mensajesDiv.appendChild(mensajeDiv);
 
         stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(mensaje));

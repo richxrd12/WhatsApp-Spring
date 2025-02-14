@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Chat - WhatsApp Web</title>
     <link rel="stylesheet" th:href="@{/css/chat.css}">
 </head>
 <body>
@@ -28,9 +28,18 @@
     <div id="chat">
         <div id="messages">
             <div th:each="mensaje : ${mensajes}"
-                th:classappend="${mensaje.usuarioEmisor == nombreUsuario} ? 'mensaje-emisor' : 'mensaje-receptor'"
-                class="mensaje">
-                <p th:text="${mensaje.getTexto()}"></p>
+                th:classappend="${mensaje.usuarioReceptor.equals(usuario)} ? 'mensaje-emisor' : 'mensaje-receptor'">
+
+                <a th:if="${mensaje.usuarioReceptor.equals(usuario)}" th:href="@{/editar/{id}(id=${mensaje.id})}">
+                    <p th:text="${mensaje.getTexto()}"></p>
+                    <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                </a>
+
+                <a th:if="${!mensaje.usuarioReceptor.equals(usuario)}" href="">
+                    <p th:text="${mensaje.getTexto()}"></p>
+                    <span th:text="${mensaje.getFecha().toLocalDate().toString().replace('-', '/')}"></span>
+                </a>
+
             </div>
         </div>
     </div>
